@@ -1,0 +1,154 @@
+/* ── Effects Panel ── */
+.effects-panel {
+  grid-column: 1 / -1;
+}
+
+.effects-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-md);
+}
+
+.effects-title {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--text-secondary);
+}
+
+.effects-note {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--text-dim);
+  background: var(--bg-control);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.effects-body {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-xl);
+}
+
+.effects-deck {
+  flex: 1;
+}
+
+.effects-deck-label {
+  font-family: var(--font-display);
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  display: block;
+  margin-bottom: var(--space-sm);
+}
+
+.effects-buttons {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.effects-divider {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    var(--border-subtle),
+    transparent
+  );
+  align-self: center;
+}
+
+/* ── Effect Button ── */
+.effect-btn {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  background: var(--bg-control);
+  border: 1px solid var(--border-dim);
+  min-width: 64px;
+  transition: all var(--transition-fast);
+  overflow: hidden;
+}
+
+.effect-icon {
+  font-size: 1.1rem;
+  transition: transform var(--transition-fast);
+}
+
+.effect-label {
+  font-family: var(--font-display);
+  font-size: 0.5rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+  transition: color var(--transition-fast);
+}
+
+.effect-btn:hover {
+  background: var(--bg-control-hover);
+  border-color: var(--border-subtle);
+}
+
+.effect-btn:hover .effect-icon {
+  transform: scale(1.15);
+}
+
+/* Active states */
+.effect-cyan.active {
+  border-color: var(--neon-cyan);
+  background: rgba(0, 240, 255, 0.08);
+  box-shadow: var(--glow-cyan);
+}
+
+.effect-cyan.active .effect-label {
+  color: var(--neon-cyan);
+}
+
+.effect-magenta.active {
+  border-color: var(--neon-magenta);
+  background: rgba(255, 0, 229, 0.08);
+  box-shadow: var(--glow-magenta);
+}
+
+.effect-magenta.active .effect-label {
+  color: var(--neon-magenta);
+}
+
+/* Glow ring animation */
+.effect-glow-ring {
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.effect-cyan .effect-glow-ring {
+  animation: glow-pulse 1.5s ease infinite;
+}
+
+.effect-magenta .effect-glow-ring {
+  animation: glow-pulse-magenta 1.5s ease infinite;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .effects-body {
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .effects-divider {
+    width: 100%;
+    height: 1px;
+  }
+}

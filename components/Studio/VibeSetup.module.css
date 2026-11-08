@@ -1,0 +1,72 @@
+.dialog {
+  --panel: var(--surface, #1c1815);
+  --edge: var(--line, #514034);
+  --text: var(--ink, #faf4e9);
+  --subtle: var(--muted, #c2b8ad);
+  --active: var(--violet, #ff986f);
+  --action: var(--accent, #ff7746);
+  --dialog-inset: clamp(14px, 3vw, 30px);
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--edge);
+  border-top: 4px solid var(--action);
+  font-family: inherit;
+  width: min(700px, calc(100% - 24px));
+  max-height: min(720px, calc(100dvh - 24px));
+  padding: 0;
+  margin: auto;
+  overflow: hidden;
+}
+.dialog[open] { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; }
+:global(html):has(.dialog[open]) { overflow: hidden; }
+.dialog::backdrop { background: #110c09c7; }
+.top, .actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px var(--dialog-inset); }
+.top { color: var(--subtle); border-bottom: 1px solid var(--edge); font-size: 13px; }
+.progress { display: grid; gap: 5px; font-variant-numeric: tabular-nums; }
+.progressTrack { display: flex; gap: 4px; }
+.progressTrack i { width: 18px; height: 3px; background: var(--edge); }
+.progressTrack i[data-reached=true] { background: var(--action); }
+.body { padding: clamp(18px, 3vw, 26px) var(--dialog-inset); overflow-y: auto; overscroll-behavior: contain; scrollbar-color: var(--edge) var(--panel); }
+.body h2 { font: 800 clamp(2rem, 4.5vw, 3.25rem)/.98 var(--studio-display, sans-serif); text-transform: uppercase; text-wrap: balance; }
+.body > p { margin: 9px 0 14px; color: var(--subtle); }
+.choices { border: 0; min-width: 0; margin-top: 16px; }
+.choices legend { color: var(--subtle); font-weight: 600; padding-bottom: 8px; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(146px, 100%), 1fr)); gap: 8px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.dialog button { border: 1px solid var(--edge); background: var(--raised, #30241d); color: var(--text); padding: 8px 14px; font: inherit; min-height: 44px; }
+.dialog .close { display: grid; place-items: center; width: 44px; padding: 0; }
+.tiles button { text-align: left; min-height: 59px; padding: 9px 12px; font-size: clamp(15px, 2vw, 19px); }
+.tiles small { display: block; color: var(--subtle); font-size: 12px; margin-top: 4px; }
+.choices button[aria-pressed=true] { background: var(--active); border-color: var(--active); color: #20150e; }
+.choices button[aria-pressed=true] small { color: #3a2116; }
+.choices button:not([aria-pressed=true]):hover, .top button:hover { border-color: var(--active); }
+.actions { justify-content: flex-end; border-top: 1px solid var(--edge); background: var(--panel); }
+.actions .primary { display: inline-flex; align-items: center; justify-content: space-between; gap: 12px; margin-inline-start: auto; background: var(--action); color: #20150e; border-color: transparent; font-weight: 700; min-width: 128px; }
+.actions .primary:disabled { opacity: .44; cursor: default; }
+.actions .primary:not(:disabled):hover { background: var(--active); }
+.options { border-top: 1px solid var(--edge); margin-top: 16px; }
+.options summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 44px; color: var(--text); cursor: pointer; list-style: none; }
+.options summary::-webkit-details-marker { display: none; }
+.options[open] summary svg { transform: rotate(180deg); }
+.settings { display: grid; gap: 12px; }
+.field { display: grid; gap: 6px; margin-top: 12px; color: var(--subtle); font-size: 13px; }
+.field select, .field textarea { width: 100%; border: 1px solid var(--edge); color: var(--text); background: var(--base, #12110f); padding: 8px 10px; font: inherit; }
+.field textarea { resize: vertical; }
+.check { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.check input { accent-color: var(--active); }
+
+@media (min-width: 481px) {
+  .dialog[data-step="0"] .tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (min-width: 800px) {
+  .dialog[data-step] {
+    --dialog-inset: clamp(26px, 3vw, 40px);
+    width: min(1160px, calc(100% - clamp(48px, 8vw, 120px)));
+  }
+  .dialog[data-step="1"] .tiles { gap: 12px; }
+}
+
+@media (max-width: 480px) {
+  .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

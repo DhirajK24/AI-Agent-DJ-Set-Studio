@@ -1,0 +1,109 @@
+/* ── Deck Component ── */
+.deck {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  position: relative;
+  overflow: visible;
+}
+
+/* Deck accent border glow */
+.deck-a::before {
+  background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.3), transparent);
+}
+
+.deck-b::before {
+  background: linear-gradient(90deg, transparent, rgba(255, 0, 229, 0.3), transparent);
+}
+
+/* ── Deck Header ── */
+.deck-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.deck-label {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.deck-track-title {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+
+/* ── YouTube Player ── */
+.deck-player-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--bg-input);
+}
+
+.deck-player-border {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border-dim);
+  transition: border-color var(--transition-normal);
+}
+
+.deck-player-border.accent-cyan:hover {
+  border-color: var(--border-glow-cyan);
+}
+
+.deck-player-border.accent-magenta:hover {
+  border-color: var(--border-glow-magenta);
+}
+
+.deck-player {
+  width: 100%;
+  height: 100%;
+}
+
+.deck-player iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* ── Placeholder ── */
+.deck-player-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  text-align: center;
+  padding: var(--space-xl);
+  pointer-events: none;
+}
+
+.placeholder-icon {
+  font-size: 2.5rem;
+  opacity: 0.3;
+  animation: pulse-glow 3s ease infinite;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1200px) {
+  .deck-player-wrapper {
+    max-height: 250px;
+    aspect-ratio: auto;
+    height: 200px;
+  }
+}
